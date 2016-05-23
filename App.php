@@ -21,11 +21,13 @@ $page = preg_replace('/^([^?]+)(\?.*?)?(#.*)?$/', '$1$3', $url);
 
 switch ($page) {
     case 'bank1':
-    new ProviderController(new Provider1Processor($logger, $salt), $db, $logger);
+    $bank = new ProviderController(new Provider1Processor($logger, $salt), $db, $logger);
+    $bank->process($params);
     break;
 
     case 'bank2':
-    new ProviderController(new Provider2Processor($logger, $salt), $db, $logger);
+    $bank = new ProviderController(new Provider2Processor($logger, $salt), $db, $logger);
+    $bank->process($params);
     break;
 
     case 'list':

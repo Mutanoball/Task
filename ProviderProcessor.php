@@ -6,7 +6,7 @@ abstract class ProviderProcessor {
     }
     function normalizeFormat($params) {
         $result = $this->formatter($params);
-        $this->logger->log('конвертировали $params в result');
+        $this->logger->log('конвертировали '.json_encode($params).' в '.json_encode($result));
         return $result;
     }
     function checkParams($params) {
@@ -14,7 +14,7 @@ abstract class ProviderProcessor {
         $this->logger->log('проверили контрольную сумму');
         return $result;
     }
-    abstract function formatOutput($responseCode);
+    abstract function formatOutput($isTransactionSuccessful);
     abstract function formatter($params);
 }
 class Provider1Processor extends ProviderProcessor {
@@ -25,8 +25,8 @@ class Provider1Processor extends ProviderProcessor {
         return $result;
     }
 
-    function formatOutput($responseCode) {
-        if ($responseCode) $answer = 1; else $answer = 0;
+    function formatOutput($isTransactionSuccessful) {
+        if ($isTransactionSuccessful) $answer = 1; else $answer = 0;
         return '<answer>'.$answer.'</answer>';
     }
 }
@@ -38,8 +38,8 @@ class Provider2Processor extends ProviderProcessor {
         return $result;
     }
 
-    function formatOutput($responseCode) {
-        if ($responseCode) $answer = 'OK'; else $answer = 'ERROR';
+    function formatOutput($isTransactionSuccessful) {
+        if ($isTransactionSuccessful) $answer = 'OK'; else $answer = 'ERROR';
         return $answer;
     }
 }
