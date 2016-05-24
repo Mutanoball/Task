@@ -14,9 +14,9 @@ class ProviderController {
         return $this->processor->formatOutput($responseCode);
     }
     function updateDB($userId, $amount) {
-        $this->db->query("UPDATE user SET balance = balance + $amount datetime = now() WHERE id = $iduser");
+        $this->db->query("UPDATE user SET balance = balance + $amount datetime = now() WHERE id = $userId");
         $this->db->query("INSERT INTO user_transation (user_id, amount) VALUES ($userId, $amount)");
-        $this->logger->log('обновили баланс пользователя'.$userid);
+        $this->logger->log('обновили баланс пользователя'.$userId);
     }
 }
 ?>

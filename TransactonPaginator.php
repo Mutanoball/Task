@@ -4,9 +4,10 @@ class TransactonPaginator {
         $this->db = $db;
         $this->name = $name;
     }
-    function print(){
-    	echo "транзакции пользователя $name";
-    	$result=$this->db->query("SELECT * FROM user_transaction order by id WHERE name=$name");
+    function printer(){
+    	echo "транзакции пользователя $this->name";
+    	$result=$this->db->query("SELECT * FROM user_transaction ORDER BY id WHERE name=$this->name");
+    	$i=0;
     	while ($row = $result->fetch_assoc()) {
         	$i++;
         	$id     = $row['id'];
